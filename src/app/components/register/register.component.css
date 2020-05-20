@@ -1,0 +1,166 @@
+.outer-box{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.main{
+    align-content: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    display: flex;
+    padding: 30px 24px 36px;
+    width: 800px;
+    margin: auto;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.name_box{
+    margin-left: 10px;
+}
+
+span{
+    font-size: 20px;
+}
+
+.second-heading{
+    color: #202124;
+    font-family: 'Google Sans',arial,sans-serif;
+    padding-bottom: 0;
+    font-size: 24px;
+    font-weight: 400;
+    padding-top: 10px;
+}
+
+.column-left{
+    flex: 60%;
+}
+
+.quote{
+    text-align: center;
+}
+
+.textbox{
+    display: inline-flex;
+    width: min-content;
+    margin: 5px;
+}
+
+.textbox1{
+    display: inline-flex;
+    width: 40%;
+    margin-left: 5px;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+.suffix{
+    font-size: 15px;
+}
+
+.textbar{
+    width: 420px;
+}
+
+.fieldsize{
+    width: 12em;
+}
+
+.xyZs{
+    line-height: 1;
+}
+
+.xyz{
+    line-height: 1;
+}
+
+.link{
+    float: left;
+    font-size: 16px;
+}
+
+.link a {
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.button{
+    float: right;
+    margin-right: 28px;
+    padding: 0 30px;
+    background-color: #4688F1;
+}
+
+@media only screen and (max-width:786px){
+    .textbar{
+        width: 410px;
+    }
+}
+
+@media only screen and (max-width:600px){
+    .main{
+        align-content: center;
+        border: none;
+        border-radius: inherit;
+        display: flex;
+        padding: 0;
+        width: auto;
+        margin-left: 10px;
+        margin-right: 0;
+        z-index: 2;
+        overflow: hidden;
+    }
+
+    .textbox1{
+        display: block;
+        width: fit-content;
+        margin-left: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .textbar{
+        width: 300px;
+    }
+
+    .fieldsize{
+        width: 300px;
+    }
+
+    .textbox{
+        display: block;
+        width: 300px;
+        margin: 0;
+    }
+
+    .mat-form-field{
+        width: 300px;
+    }
+
+    .column-left{
+        flex: 100%;
+    }
+
+    .column-right{
+        display: none;
+    }
+
+    .name_box{
+        margin-left: 0;
+    }
+
+    .xyz{
+        line-height: 1;
+        width: 300px;
+        overflow: hidden;
+    }
+
+    .button{
+        float: right;
+        margin-right: 10px;
+        padding: 0 30px;
+    }
+}
+

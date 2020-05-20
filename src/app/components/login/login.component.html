@@ -1,0 +1,56 @@
+<div class="outer-box">
+    <div class="main">
+        <div class="column-center">
+            <span style="color:#4285f4;">F</span>
+            <span style="color:#ea4335;">u</span>
+            <span style="color:#fbbc05;">n</span>
+            <span style="color:#4285f4;">d</span>
+            <span style="color:#34a853 ;">o</span>
+            <span style="color:#ea4335;">o</span>
+            <h1 class="second-heading">Sign In</h1>
+            <p class="third-heading">to continue to Mail</p>
+            <form [formGroup]="myForm">
+                <p>
+                    <mat-form-field appearance="outline" class="textbar">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="email" formControlName="email" required>
+                        <mat-error *ngIf = "myForm.hasError('required','email')">
+                            Please enter valid email address
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <p class="textbox1">
+                    <!-- <mat-form-field appearance="outline" class="textbar">
+                        <mat-label>Password</mat-label>
+                        <input matInput placeholder="password" [type]="hide ? 'password' : 'text'" [formControl]="passwordL" required>
+                        <mat-error *ngIf="passwordL.invalid">{{getPasswordErrorMessage()}}</mat-error>
+                            <mat-icon matSuffix (click) = "hide = !hide">
+                                {{hide ? 'visibility_off' : 'visibility'}}
+                            </mat-icon>
+                    </mat-form-field> -->
+                    <mat-form-field appearance="outline" class="textbar">
+                        <mat-label>Password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+                        <mat-error *ngIf = "myForm.hasError('required','password')">
+                            Please enter your password
+                        </mat-error>
+                        <button mat-icon-button matSuffix (click) = "hide = !hide" 
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>
+                                {{hide ? 'visibility_off' : 'visibility'}}
+                            </mat-icon>
+                        </button>
+                    </mat-form-field>
+                </p>
+                <div class="link">
+                    <span><a [routerLink]="['/forgotpassword']">forgot email?</a></span>
+                </div>
+                <div class = "new-link">
+                    <span><a [routerLink]="['/register']">Create account</a></span>
+                    <button mat-raised-button color="primary" class="button">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

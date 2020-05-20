@@ -1,0 +1,83 @@
+<div class="outer-box">
+    <div class="main">
+        <div class="column-left">
+            <span style="color:#4285f4;">F</span>
+            <span style="color:#ea4335;">u</span>
+            <span style="color:#fbbc05;">n</span>
+            <span style="color:#4285f4;">d</span>
+            <span style="color:#34a853 ;">o</span>
+            <span style="color:#ea4335;">o</span>
+            <h1 class="second-heading">Create your Fundoo Account</h1>
+            <p class="third-heading">to continue to Mail</p>
+            <form [formGroup]="myForm">
+                <p class="textbox">
+                    <mat-form-field appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input matInput placeholder="Placeholder" formControlName="name" required>
+                        <mat-error *ngIf = "myForm.hasError('required','name')">
+                            Please enter your first name
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="name_box" appearance="outline" >
+                        <mat-label>Last Name</mat-label>
+                        <input matInput placeholder="Placeholder" formControlName="name" required>
+                        <mat-error *ngIf = "myForm.hasError('required','name')">
+                            Please enter your last name
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <mat-form-field appearance="outline" class="textbar">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="email" required>
+                    <mat-error *ngIf = "myForm.hasError('required','email')">
+                        Please enter valid email address
+                    </mat-error>
+                </mat-form-field>
+                <p class="xyZs">You can use letters, numbers & periods.</p>
+                <div>
+                    <p class="textbox1">
+                        <mat-form-field appearance="outline" class="fieldsize">
+                            <mat-label>Password</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+                            <mat-error *ngIf = "myForm.hasError('required','password')">
+                               Please enter your password     
+                            </mat-error>
+                            <button mat-icon-button matSuffix (click) = "hide = !hide" 
+                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>
+                                    {{hide ? 'visibility_off' : 'visibility'}}
+                                </mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </p>
+                    <p class="textbox1">
+                        <mat-form-field appearance="outline" class="fieldsize">
+                            <mat-label>Confirm</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="myForm.hasError('notSame')">
+                                Passwords do not match
+                            </mat-error>
+                            <button mat-icon-button matSuffix (click) = "hide = !hide" 
+                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>
+                                    {{hide ? 'visibility_off' : 'visibility'}}
+                                </mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </p>
+                    <p class="xyz">Use 8 or more characters with a mix of letters, numbers & symbols.</p>
+                </div>
+                <div style="margin-top: 15px;">
+                    <span class="link"><a [routerLink]="['/login']">sign-in instead</a></span>
+                    <button mat-raised-button color="primary" class="button">Register</button>
+                </div>
+            </form>
+        </div>
+    
+        <div class="column-right">
+            <img src="../../../assets/account.svg" width="300">
+            <p class="quote">One Account.All of Fundoo working for you.</p>
+        </div>
+    </div>
+
+</div>
