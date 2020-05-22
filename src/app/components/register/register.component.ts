@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { UserService } from 'src/app/service/userService/user.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control:FormControl | null, form : FormGroupDirective | NgForm | null) : boolean {
@@ -22,12 +23,16 @@ export class RegisterComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+    private userService: UserService
+    ) {
     this.myForm = this.formBuilder.group({
-      name: ['',[Validators.required]],
+      firstName: ['',[Validators.required]],
+      lastName:['',[Validators.required]],
       email : ['',[Validators.required,Validators.email]],
       password: ['', [Validators.required]],
-      confirmPassword: ['']
+      confirmPassword: [''],
+      service:['advance']
     },{ validator : this.checkPasswords });
    
   }
@@ -43,4 +48,18 @@ export class RegisterComponent implements OnInit {
   }
 
   hide = false
+
+  register() {
+    if(this.myForm.valid)
+    this.userService.register(this.myForm.value).subscribe(data => {
+      console.log('data after register', data);
+
+    }, err => {
+      console.log('err after sign up', err);
+
+    })
+    else{
+      console.log('fill');
+    }
+  }
 }

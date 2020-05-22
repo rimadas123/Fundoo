@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { UserService } from 'src/app/service/userService/user.service';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -8,17 +9,30 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class ForgotpasswordComponent implements OnInit {
 
-  constructor() { }
+  myForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder,
+    private userService: UserService
+    ) {
+    this.myForm = this.formBuilder.group({
+      email : ['',[Validators.required,Validators.email]]
+    }
+    )}
 
   ngOnInit(): void {
   }
-  email = new FormControl('', [Validators.required, Validators.email]);
-  
-  getErrorMessage(){
-    if( this.email.hasError('required')){
-      return 'You must enter a valid email address'
-    }
+ 
+  forgot() {
+    if(this.myForm.valid)
+    this.userService.forgot(this.myForm.value).subscribe(data => {
+      console.log('data after register', data);
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+    }, err => {
+      console.log('err after sign up', err);
+
+    })
+    else{
+      console.log('fill');
+    }
   }
 }

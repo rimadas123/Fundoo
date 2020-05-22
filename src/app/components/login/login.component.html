@@ -20,14 +20,6 @@
                     </mat-form-field>
                 </p>
                 <p class="textbox1">
-                    <!-- <mat-form-field appearance="outline" class="textbar">
-                        <mat-label>Password</mat-label>
-                        <input matInput placeholder="password" [type]="hide ? 'password' : 'text'" [formControl]="passwordL" required>
-                        <mat-error *ngIf="passwordL.invalid">{{getPasswordErrorMessage()}}</mat-error>
-                            <mat-icon matSuffix (click) = "hide = !hide">
-                                {{hide ? 'visibility_off' : 'visibility'}}
-                            </mat-icon>
-                    </mat-form-field> -->
                     <mat-form-field appearance="outline" class="textbar">
                         <mat-label>Password</mat-label>
                         <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
@@ -47,7 +39,7 @@
                 </div>
                 <div class = "new-link">
                     <span><a [routerLink]="['/register']">Create account</a></span>
-                    <button mat-raised-button color="primary" class="button">Login</button>
+                    <button mat-raised-button color="primary" (click)="login()" class="button">Login</button>
                 </div>
             </form>
         </div>

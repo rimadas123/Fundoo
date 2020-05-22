@@ -1,6 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { UserService } from 'src/app/service/userService/user.service';
+import { ActivatedRoute, Params } from "@angular/router";
 
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control:FormControl | null, form : FormGroupDirective | NgForm | null) : boolean {
+    const invalidCtrl = !!(control && control.invalid && control.parent.dirty);
+    const invalidParent = !!(control && control.parent && control.parent.invalid && control.parent.dirty);
+
+    return (invalidCtrl || invalidParent);
+  }
+}
 
 @Component({
   selector: 'app-resetpassword',
@@ -9,29 +20,50 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class ResetpasswordComponent implements OnInit {
 
-  constructor() { }
+  myForm: FormGroup;
+
+  matcher = new MyErrorStateMatcher();
+
+  constructor(private formBuilder: FormBuilder,
+    private userService: UserService,
+    private activatedRoute: ActivatedRoute
+    ) {
+    this.myForm = this.formBuilder.group({
+      newPassword: ['', [Validators.required]],
+      confirmPassword: ['']
+    },{ validator : this.checkPasswords });
+   
+    this.activatedRoute.params.subscribe((params: Params) => {
+      let key = params['token'];
+      console.log(key);
+      localStorage.setItem('tokenName',key);
+    });
+  }
+
+  checkPasswords(group: FormGroup) {
+    let pass = group.controls.newPassword.value;
+    let confirmPass = group.controls.confirmPassword.value;
+
+    return pass === confirmPass ? null : { notSame : true}
+  }
 
   ngOnInit(): void {
   }
 
-  hide=true
+  hide=false
 
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required, Validators.minLength(6)]);
-  
-  getErrorMessage(){
-    if( this.email.hasError('required')){
-      return 'You must enter a valid email address'
+  reset() {
+    if(this.myForm.valid)
+    this.userService.reset(this.myForm.value).subscribe(data => {
+      console.log('data after resetting password', data);
+
+    }, err => {
+      console.log('error', err);
+
+    })
+    else{
+      console.log('fill');
     }
-
-    return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
-  getPasswordErrorMessage(){
-    if( this.password.hasError('required')){
-      return 'You must enter atleast 6 characters'
-    }
-
-    return this.password.hasError('passwors') ? 'minimum 6 characters' : '';
-  }
 }
